@@ -1,30 +1,24 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 Route::get('/', function () {
-    return 'Ruta Home';
+    return view('home');
 });
 
 Route::get('blog', function () {
-    return 'Listado de publicaciones';
+
+    $posts = [
+        ['id' => 1, 'title' => 'PHP', 'slug' => 'php'],
+        ['id' => 2, 'title' => 'Laravel', 'slug' => 'laravel'],
+    ];
+
+    return view('blog', ['posts' => $posts]);
 });
 
 Route::get('blog/{slug}', function ($slug) {
-    return $slug;
-});
 
-Route::get('buscar', function (Request $request) {
-    return $request->all();
+    $post = $slug;
+
+    return view('post', ['post' => $post]);
 });
